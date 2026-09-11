@@ -62,32 +62,41 @@ From there, follow whichever section below matches the runtime you're bootstrapp
 
 ### OpenClaw
 
-```bash
-# Into the active workspace's skills/ (visible to that agent only)
-openclaw skills install git:arunjeetsingh/mi-coding-agent
+`openclaw skills install git:owner/repo[@ref]` expects a single skill with `SKILL.md` at
+the repo root, so it can't ingest a monorepo with three skills under `skills/` directly.
+Until these are published to ClawHub (see below), clone the repo and install each skill
+from its local path instead — `openclaw skills install ./path` works with a subdirectory:
 
-# Or shared across every local agent
-openclaw skills install git:arunjeetsingh/mi-coding-agent --global
+```bash
+git clone https://github.com/arunjeetsingh/mi-coding-agent.git /tmp/mi-coding-agent
+
+# Into the active workspace's skills/ (visible to that agent only)
+openclaw skills install /tmp/mi-coding-agent/skills/open-pr
+openclaw skills install /tmp/mi-coding-agent/skills/review-pr
+openclaw skills install /tmp/mi-coding-agent/skills/address-review-comments
+cp /tmp/mi-coding-agent/skills/WAITING.md ~/.openclaw/workspace/skills/WAITING.md
+
+# Or shared across every local agent: add --global to each install above
 ```
 
-`openclaw skills install git:owner/repo[@ref]` clones the repo and looks for `SKILL.md` at
-the source root — this repo groups its three skills under `skills/`, and OpenClaw
-discovers a `SKILL.md` anywhere up to 6 levels under a configured skill root, so once
-cloned into a skills directory (or added via `skills.load.extraDirs` pointing at a local
-checkout's `skills/` folder) all three (`open-pr`, `review-pr`, `address-review-comments`)
-become available. Verify with:
+Verify with:
 
 ```bash
 openclaw skills list
 ```
 
-Once these are published to ClawHub (see below), install with:
+**Once published to ClawHub**, this collapses to one line per skill, no clone required:
 
 ```bash
 openclaw skills install @maximum-impact-studio/open-pr
 openclaw skills install @maximum-impact-studio/review-pr
 openclaw skills install @maximum-impact-studio/address-review-comments
 ```
+
+Alternatively, point `skills.load.extraDirs` in `openclaw.json` at a persistent local
+checkout's `skills/` folder (`git pull` there to update) — OpenClaw discovers a `SKILL.md`
+anywhere up to 6 levels under a configured skill root, so all three become available
+without a separate install step per skill.
 
 ### Claude Code
 
