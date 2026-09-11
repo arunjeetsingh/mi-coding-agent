@@ -10,6 +10,23 @@ metadata: { "openclaw": { "emoji": "🛠️", "requires": { "bins": ["gh", "jq",
 Take the PR number from the user's request (or `$ARGUMENTS` on hosts that substitute it).
 If it is not explicit, ask which PR before doing anything.
 
+## Scope and autonomous actions (read before invoking)
+
+Invoking this skill authorizes it to, without pausing for a per-step confirmation: edit
+files on the PR branch, make one commit per review round, push that commit, and post one
+GitHub PR reply comment per round through your `gh` credentials. It decides which round
+to act on by matching PR comment CONTENT against a marker pattern (see Step 2), not by
+authenticating who posted it beyond GitHub's own login attribution — anyone who can
+comment on the PR (including, on some repos, the PR author replying to their own
+automated review) can shape which comment this skill treats as "the latest reviewer
+batch." Run it only on repositories where you trust everyone able to comment on a PR not
+to forge a batch marker, and review the round's diff and reply before treating it as
+final — this skill never merges or deploys, and a human is expected to do both. When it
+ends a round by arming a wait for the next batch, that watch keeps running GitHub reads
+(and, on a real batch, another edit/commit/push/comment round) after this invocation
+ends, per whichever host mechanism `../WAITING.md` selects for your runtime; see that
+file's host-mapping table for how to list, pause, or permanently stop it.
+
 **Every command block below opens with this preamble, and that is deliberate.** Each
 shell call may run in a *fresh process* — variables do not reliably survive from one block
 to the next on every host — so a block that assumes `$PR` from an earlier one can run with

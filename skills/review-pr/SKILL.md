@@ -10,6 +10,19 @@ Review one pull request repeatedly until it has no blocking issues within the ag
 review scope. Use GitHub comments as the durable review ledger and a background watch (see
 `../WAITING.md`) for the polling loop.
 
+## Scope and autonomous actions (read before invoking)
+
+Invoking this skill authorizes it to, without pausing for a per-step confirmation: post
+one top-level GitHub PR comment per completed review cycle, and create or reactivate a
+background watch that keeps running GitHub reads (and, on a qualifying author response,
+another review cycle plus another comment) after this invocation ends — potentially
+across sessions, depending on which host mechanism `../WAITING.md` selects for your
+runtime. It never pushes code, edits or deletes comments, resolves threads, approves,
+merges, labels, or closes the PR, and never modifies the PR branch. If you need to know
+exactly how to list, pause, or permanently stop a watch this skill armed, see the "Arm
+the Watch" section below and `../WAITING.md`'s host-mapping table before invoking it in
+an environment where an unattended background job would be unexpected.
+
 ## Inputs
 
 Require one of:

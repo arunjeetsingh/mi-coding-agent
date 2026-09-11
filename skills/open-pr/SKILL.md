@@ -13,6 +13,17 @@ substitute it). If it is not explicit, ask what to build before touching anythin
 This is the front half of the loop. The back half is `address-review-comments` for the
 PR number; this skill ends by handing off to it.
 
+## Scope and autonomous actions (read before invoking)
+
+Invoking this skill authorizes it to take the following actions **without pausing for a
+per-step confirmation**, as part of its normal, disclosed workflow: push a new branch to
+the remote, open a pull request, and arm a background watch (see `../WAITING.md`) that
+later invokes `address-review-comments` on your behalf when a reviewer responds. If your
+environment expects a human to confirm before code leaves the local machine, gate that at
+the point you invoke this skill — do not invoke it unless you intend for a PR to actually
+be opened. It never merges and never deploys (see below), and it never modifies a branch
+or checkout you did not create in Step 1.
+
 ## Standing rules (non-negotiable, same as the review skill)
 
 - **Never merge.** The repo owner merges after their own review. Never run `gh pr merge`.
