@@ -1,0 +1,10 @@
+{
+  "name": "address-review-comments",
+  "description": "Address the latest reviewer batch with a pre-commit self-audit, then commit, push, and reply point-by-point.",
+  "version": "1.0.0",
+  "author": { "name": "Maximum Impact Studio", "url": "https://maximumimpact.studio" },
+  "homepage": "https://github.com/arunjeetsingh/mi-coding-agent",
+  "repository": "https://github.com/arunjeetsingh/mi-coding-agent",
+  "license": "MIT",
+  "keywords": ["github", "pull-request", "code-review", "coding-agent"]
+}

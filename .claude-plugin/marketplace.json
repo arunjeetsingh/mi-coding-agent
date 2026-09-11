@@ -1,0 +1,28 @@
+{
+  "name": "mi-coding-agent",
+  "owner": {
+    "name": "Maximum Impact Studio",
+    "url": "https://maximumimpact.studio"
+  },
+  "metadata": {
+    "description": "Maximum Impact Studio's portable PR workflow skills for coding agents: open a review-ready PR, review one until it's clean, and address reviewer feedback round by round.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "open-pr",
+      "source": "./skills/open-pr",
+      "description": "Build a change in its own worktree, prove it with mutation testing, self-audit, and open a review-ready PR."
+    },
+    {
+      "name": "review-pr",
+      "source": "./skills/review-pr",
+      "description": "Review a PR against its full history, post one consolidated comment, and watch for the author's fix."
+    },
+    {
+      "name": "address-review-comments",
+      "source": "./skills/address-review-comments",
+      "description": "Address the latest reviewer batch with a pre-commit self-audit, then commit, push, and reply point-by-point."
+    }
+  ]
+}

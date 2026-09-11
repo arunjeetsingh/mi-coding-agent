@@ -1,0 +1,10 @@
+{
+  "name": "open-pr",
+  "description": "Build a change in its own worktree, prove it with mutation testing, self-audit, and open a review-ready PR.",
+  "version": "1.0.0",
+  "author": { "name": "Maximum Impact Studio", "url": "https://maximumimpact.studio" },
+  "homepage": "https://github.com/arunjeetsingh/mi-coding-agent",
+  "repository": "https://github.com/arunjeetsingh/mi-coding-agent",
+  "license": "MIT",
+  "keywords": ["github", "pull-request", "code-review", "mutation-testing", "coding-agent"]
+}
